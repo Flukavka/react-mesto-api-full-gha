@@ -1,0 +1,16 @@
+.profile__avatar-edit {
+  background: center/26px no-repeat rgba(0 0 0 / .8) url(../../../images/pencil-icon.svg);
+  border: none;
+  border-radius: 48%;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  padding: 60px;
+  position: absolute;
+  transition: opacity .4s linear;
+}
+
+.profile__avatar-edit:hover {
+  opacity: 1;
+}

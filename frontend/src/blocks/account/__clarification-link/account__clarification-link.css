@@ -1,0 +1,10 @@
+.account__clarification-link {
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.4s linear;
+}
+
+.account__clarification-link:hover {
+  opacity: 0.6;
+}

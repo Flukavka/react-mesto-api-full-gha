@@ -1,0 +1,18 @@
+.account__button-submit {
+  margin-top: 216px;
+  box-sizing: border-box;
+  padding: 14px 84px;
+  transition: opacity 0.4s linear;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #000;
+  border: none;
+  border-radius: 2px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.account__button-submit:hover {
+  opacity: 0.85;
+}

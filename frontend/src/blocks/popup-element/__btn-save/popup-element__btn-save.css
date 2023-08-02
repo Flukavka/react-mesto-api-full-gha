@@ -1,0 +1,12 @@
+.popup-element__btn-save {
+  padding: 14px 144px 14px 144px;
+}
+
+@media screen and (max-width: 850px) {
+  .popup-element__btn-save {
+    padding: 14px 91px;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-top: 8px;
+  }
+}

@@ -1,0 +1,10 @@
+.popup-solution__container {
+  background-color: #fff;
+  box-sizing: border-box;
+  max-width: 430px;
+  padding: 60px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}

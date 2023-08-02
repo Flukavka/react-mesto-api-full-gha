@@ -1,0 +1,27 @@
+.account__input:first-child {
+  margin-bottom: 30px;
+}
+
+.account__input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #ccc;
+  margin-bottom: 13px;
+}
+
+.account__input:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.account__input {
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  min-width: 358px;
+}

@@ -1,0 +1,17 @@
+.popup__error {
+  margin: 5px 0 0 0;
+  color: #ff0000;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  height: 15px;
+  opacity: 0;
+}
+
+.popup__error:first-of-type {
+  margin-bottom: 19px;
+}
+
+.popup__error:last-of-type {
+  margin-bottom: 31px;
+}

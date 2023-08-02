@@ -1,0 +1,9 @@
+.popup__close-clarification {
+  margin: -246px 0 0 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__close-clarification {
+    margin: -234px 0 0 -20px;
+  }
+}

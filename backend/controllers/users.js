@@ -35,6 +35,7 @@ module.exports.createUser = (req, res, next) => {
     });
 };
 
+// отрбатывает при запросе /signin, возвращает в ответ токен
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 

@@ -35,7 +35,8 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      const token = localStorage.getItem('token');
+      Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
         .then(([userData, cards]) => {
           setCurrentUserState(userData);
           setCardsState(cards);
@@ -135,6 +136,8 @@ function App() {
     //eslint-disable-next-line
   }, [])
 
+  // проверяет наличие токена в локальном хранилище
+  // при наличии, переводит на гланую страницу
   const handleTokenCheck = () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -144,7 +147,7 @@ function App() {
             return;
           }
           setLoggedState(true);
-          setEmailState(res.data.email);
+          setEmailState(res./* data. */email);
           navigate('/');
         })
         .catch(err => console.error(err))

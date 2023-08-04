@@ -12,16 +12,27 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getInitialCards() {
+  //  обращается к серверу для получения карточкек из базы
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      credentials: 'include',
+      headers: {
+        'Аuthorization': `${token}`,
+        'Content-Type': 'application/json',
+      }
     })
       .then(this._checkResponse)
   }
 
-  getUserInfo() {
+  //  обращается к серверу для получения данных
+  //  о текущем залогиненном пользователе
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      credentials: 'include',
+      headers: {
+        'Аuthorization': `${token}`,
+        'Content-Type': 'application/json',
+      }
     })
       .then(this._checkResponse)
   }
@@ -30,7 +41,8 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       body: JSON.stringify({ name, about }),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -39,7 +51,8 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       body: JSON.stringify({ avatar }),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -48,7 +61,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       body: JSON.stringify({ name, link }),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -57,7 +71,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${card._id}`, {
       method: 'DELETE',
       body: JSON.stringify(card),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -66,7 +81,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'PUT',
       body: JSON.stringify(card.likes),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -75,7 +91,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'DELETE',
       body: JSON.stringify(card.likes),
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -83,9 +100,9 @@ class Api {
 
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  baseUrl: 'http://localhost:4000',
   headers: {
-    authorization: '2ea75de7-9cf6-4052-aa7b-44f53981b503',
+    /* authorization: '2ea75de7-9cf6-4052-aa7b-44f53981b503', */
     'Content-Type': 'application/json'
   }
 });

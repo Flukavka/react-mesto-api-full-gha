@@ -1,7 +1,5 @@
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
-
-const router = express.Router();
 const { auth } = require('../middlewares/auth');
 const {
   getUsers,
@@ -10,6 +8,9 @@ const {
   updateUserProfile,
   updateUserAvatar,
 } = require('../controllers/users');
+const { REG_EXP_LINK } = require('../utils/constants');
+
+const router = express.Router();
 
 //  получает данные пользователей
 router.get('/', getUsers);
@@ -35,7 +36,7 @@ router.patch('/me', celebrate({
 //  обновляет аватар
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(/(https?:\/\/)(w{3}\.)?(((\d{1,3}\.){3}\d{1,3})|((\w-?)+\.(ru|com)))(:\d{2,5})?((\/.+)+)?\/?#?/),
+    avatar: Joi.string().pattern(REG_EXP_LINK),
   }).unknown(true),
 }), updateUserAvatar);
 

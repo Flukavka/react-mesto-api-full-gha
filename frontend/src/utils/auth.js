@@ -52,7 +52,11 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: [
+    'http://localhost:4000',
+    'https://api.nosarevavs.nomoreparties.co/',
+    'http://api.nosarevavs.nomoreparties.co/',
+  ],
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

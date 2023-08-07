@@ -52,7 +52,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.nosarevavs.nomoreparties.co/',
+  baseUrl: 'https://api.nosarevavs.nomoreparties.co',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

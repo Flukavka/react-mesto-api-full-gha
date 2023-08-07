@@ -19,8 +19,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'http://nosarevavs.nomoreparties.co/',
-    'https://nosarevavs.nomoreparties.co/',
+    'http://nosarevavs.nomoreparties.co',
+    'https://nosarevavs.nomoreparties.co',
   ],
   credentials: true,
 }));

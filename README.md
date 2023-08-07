@@ -10,8 +10,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x (130.193.51.26)
+IP-адрес 130.193.51.26
 
-Frontend https://...
+Frontend https://nosarevavs.nomoreparties.co
 
-Backend https://...
+Backend https://api.nosarevavs.nomoreparties.co

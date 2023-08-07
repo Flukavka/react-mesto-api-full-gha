@@ -17,7 +17,7 @@ mongoose.connect(DB_URL);
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'http://nosarevavs.nomoreparties.co/'],
   credentials: true,
 }));
 

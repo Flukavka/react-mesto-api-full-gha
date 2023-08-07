@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 
-function Header({ loggedIn, handleExitClick, email }) {
+function Header({ loggedIn, handleExitClick, email, setCurrentUserState }) {
   const location = useLocation();
 
   const handleLinkClick = () => {
     localStorage.removeItem('token');
     handleExitClick();
+    setCurrentUserState({});
   }
 
   return (

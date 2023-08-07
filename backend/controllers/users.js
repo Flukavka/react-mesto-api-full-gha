@@ -47,7 +47,7 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      return res.status(OK_STATUS).send({ token });
+      return res.status(OK_STATUS).send({ token, user });
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -107,7 +107,12 @@ module.exports.updateUserProfile = (req, res, next) => {
     )
     .then((user) => {
       if (user) {
-        res.status(OK_STATUS).send({ name, about });
+        res.status(OK_STATUS).send({
+          name,
+          about,
+          avatar: user.avatar,
+          _id: user._id,
+        });
       }
     })
     .catch((err) => {
@@ -126,7 +131,12 @@ module.exports.updateUserAvatar = (req, res, next) => {
   )
     .then((user) => {
       if (user) {
-        res.status(OK_STATUS).send({ avatar });
+        res.status(OK_STATUS).send({
+          name: user.name,
+          about: user.about,
+          avatar,
+          _id: user._id,
+        });
       }
     })
     .catch((err) => {

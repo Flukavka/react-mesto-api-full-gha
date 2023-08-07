@@ -34,16 +34,20 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    handleTokenCheck();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (isLoggedIn) {
-      const token = localStorage.getItem('token');
-      Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([userData, cards]) => {
           setCurrentUserState(userData);
           setCardsState(cards);
         })
         .catch(err => console.log(err));
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
   function handleEditAvatarClick() {
     setEditAvatarState(true);
@@ -72,8 +76,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
-
+    const isLiked = card.likes.some(item => item === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     (!isLiked ? api.likeCard(card) : api.unlikeCard(card))
       .then((newCard) => {
@@ -84,7 +87,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const isUserCard = card.owner._id === currentUser._id;
+    const isUserCard = card.owner/* ._id */ === currentUser._id;
     isUserCard && api.deleteCard(card)
       .then(() => {
         setCardsState(cards =>
@@ -131,11 +134,6 @@ function App() {
     setEmailState('');
   }
 
-  useEffect(() => {
-    handleTokenCheck();
-    //eslint-disable-next-line
-  }, [])
-
   // проверяет наличие токена в локальном хранилище
   // при наличии, переводит на гланую страницу
   const handleTokenCheck = () => {
@@ -147,7 +145,7 @@ function App() {
             return;
           }
           setLoggedState(true);
-          setEmailState(res./* data. */email);
+          setEmailState(res.email);
           navigate('/');
         })
         .catch(err => console.error(err))
@@ -161,6 +159,7 @@ function App() {
           loggedIn={isLoggedIn}
           handleExitClick={handleExitClick}
           email={email}
+          setCurrentUserState={setCurrentUserState}
         />
 
         <Routes>

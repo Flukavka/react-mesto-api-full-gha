@@ -1,7 +1,6 @@
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
   }
 
   _checkResponse(res) {
@@ -13,28 +12,34 @@ class Api {
   }
 
   //  обращается к серверу для получения карточкек из базы
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
       credentials: 'include',
       headers: {
-        'Аuthorization': `${token}`,
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
+      .catch(err => console.log(err))
   }
 
   //  обращается к серверу для получения данных
   //  о текущем залогиненном пользователе
-  getUserInfo(token) {
+  getUserInfo(/* token */) {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
       credentials: 'include',
       headers: {
-        'Аuthorization': `${token}`,
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
+      .catch(err => console.log(err))
   }
 
   setUserInfo({ name, about }) {
@@ -42,7 +47,11 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify({ name, about }),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -52,7 +61,11 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify({ avatar }),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -62,7 +75,11 @@ class Api {
       method: 'POST',
       body: JSON.stringify({ name, link }),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -72,7 +89,11 @@ class Api {
       method: 'DELETE',
       body: JSON.stringify(card),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -82,7 +103,11 @@ class Api {
       method: 'PUT',
       body: JSON.stringify(card.likes),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -92,7 +117,11 @@ class Api {
       method: 'DELETE',
       body: JSON.stringify(card.likes),
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then(this._checkResponse)
   }
@@ -101,10 +130,6 @@ class Api {
 
 const api = new Api({
   baseUrl: 'http://localhost:4000',
-  headers: {
-    /* authorization: '2ea75de7-9cf6-4052-aa7b-44f53981b503', */
-    'Content-Type': 'application/json'
-  }
 });
 
 export default api;

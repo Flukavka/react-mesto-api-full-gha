@@ -6,7 +6,7 @@ const FORBIDDEN_STATUS = 403;
 const NOT_FOUND_ERROR = 404;
 const CONFLICT_ERROR = 409;
 const INTERNAL_SERVER_ERROR = 500;
-const REG_EXP_LINK = /(https?:\/\/)(w{3}\.)?(((\d{1,}\.){3}\d{1,})|((\w-?)+\.(ru|com)))(:\d{2,})?((\/.+)+)?\/?#?/;
+const REG_EXP_LINK = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{1,4}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 module.exports = {
   OK_STATUS,

@@ -129,8 +129,8 @@ class Api {
 
 
 const api = new Api({
-  baseUrl: 'http://localhost:4000',
-  //baseUrl: 'https://api.nosarevavs.nomoreparties.co',
+  //baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://api.nosarevavs.nomoreparties.co',
 });
 
 export default api;

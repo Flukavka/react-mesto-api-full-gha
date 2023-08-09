@@ -10,7 +10,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.51.26
+IP 130.193.51.26
 
 Frontend https://nosarevavs.nomoreparties.co
 

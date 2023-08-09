@@ -12,14 +12,14 @@ class Api {
   }
 
   //  обращается к серверу для получения карточкек из базы
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
@@ -28,21 +28,21 @@ class Api {
 
   //  обращается к серверу для получения данных
   //  о текущем залогиненном пользователе
-  getUserInfo(/* token */) {
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
       .catch(err => console.log(err))
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about }, token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       body: JSON.stringify({ name, about }),
@@ -50,13 +50,13 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
   }
 
-  setUserAvatar({ avatar }) {
+  setUserAvatar({ avatar }, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       body: JSON.stringify({ avatar }),
@@ -64,13 +64,13 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
   }
 
-  addNewCard({ name, link }) {
+  addNewCard({ name, link }, token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       body: JSON.stringify({ name, link }),
@@ -78,13 +78,13 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
   }
 
-  deleteCard(card) {
+  deleteCard(card, token) {
     return fetch(`${this._baseUrl}/cards/${card._id}`, {
       method: 'DELETE',
       body: JSON.stringify(card),
@@ -92,13 +92,13 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
   }
 
-  likeCard(card) {
+  likeCard(card, token) {
     return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'PUT',
       body: JSON.stringify(card.likes),
@@ -106,13 +106,13 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
   }
 
-  unlikeCard(card) {
+  unlikeCard(card, token) {
     return fetch(`${this._baseUrl}/cards/${card._id}/likes`, {
       method: 'DELETE',
       body: JSON.stringify(card.likes),
@@ -120,7 +120,7 @@ class Api {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${localStorage.getItem('token')}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then(this._checkResponse)
@@ -129,7 +129,8 @@ class Api {
 
 
 const api = new Api({
-  baseUrl: 'https://api.nosarevavs.nomoreparties.co',
+  baseUrl: 'http://localhost:4000',
+  //baseUrl: 'https://api.nosarevavs.nomoreparties.co',
 });
 
 export default api;

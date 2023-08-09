@@ -40,7 +40,8 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      const token = localStorage.getItem('token');
+      Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
         .then(([userData, cards]) => {
           setCurrentUserState(userData);
           setCardsState(cards);
@@ -76,9 +77,10 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
+    const token = localStorage.getItem('token');
     const isLiked = card.likes.some(item => item === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    (!isLiked ? api.likeCard(card) : api.unlikeCard(card))
+    (!isLiked ? api.likeCard(card, token) : api.unlikeCard(card, token))
       .then((newCard) => {
         setCardsState((cards) => cards.map((cards) => (
           (cards._id === card._id) ? newCard : cards)));
@@ -87,8 +89,9 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const isUserCard = card.owner/* ._id */ === currentUser._id;
-    isUserCard && api.deleteCard(card)
+    const token = localStorage.getItem('token');
+    const isUserCard = card.owner === currentUser._id;
+    isUserCard && api.deleteCard(card, token)
       .then(() => {
         setCardsState(cards =>
           cards.filter(currentCard => currentCard._id !== card._id))
@@ -97,7 +100,8 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    api.setUserInfo({ name, about })
+    const token = localStorage.getItem('token');
+    api.setUserInfo({ name, about }, token)
       .then(userData => {
         setCurrentUserState(userData);
         closeAllPopups();
@@ -106,7 +110,8 @@ function App() {
   }
 
   function handleUpdateAvatar({ avatar }) {
-    api.setUserAvatar({ avatar })
+    const token = localStorage.getItem('token');
+    api.setUserAvatar({ avatar }, token)
       .then(userData => {
         setCurrentUserState(userData);
         closeAllPopups();
@@ -115,7 +120,8 @@ function App() {
   }
 
   function handleAddPlaceSubmit({ name, link }) {
-    api.addNewCard({ name, link })
+    const token = localStorage.getItem('token');
+    api.addNewCard({ name, link }, token)
       .then(newCard => {
         setCardsState([newCard, ...cards]);
         closeAllPopups();

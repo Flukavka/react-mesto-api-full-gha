@@ -10,6 +10,8 @@ const {
   CREATED_SUCCESS_STATUS,
 } = require('../utils/constants');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => User.create({
@@ -43,10 +45,9 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'some-secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret',
         { expiresIn: '7d' },
       );
-
       return res.status(OK_STATUS).send({ token, user });
     })
     .catch((err) => {
@@ -60,7 +61,6 @@ module.exports.login = (req, res, next) => {
 
 module.exports.getCurrentUserInfo = (req, res, next) => {
   const id = req.user._id;
-
   User.findById(id)
     // eslint-disable-next-line consistent-return
     .then((user) => {

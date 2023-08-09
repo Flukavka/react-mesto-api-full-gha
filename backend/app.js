@@ -1,6 +1,6 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-//  const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -37,8 +37,6 @@ app.use(helmet());
 
 app.use(limiter);
 
-//  routes.use(express.json());
-
 // подключаем логгер запросов
 app.use(requestLogger);
 
@@ -47,9 +45,6 @@ app.use('/', routes);
 // подключаем логгер ошибок
 // нужно подключить после обработчиков роутов и до обработчиков ошибок
 app.use(errorLogger);
-
-// обработчик ошибок celebrate
-//  routes.use(errors());
 
 routes.use(errorMiddleware);
 

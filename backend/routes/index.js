@@ -6,10 +6,11 @@ const routesLogin = require('./login');
 const { auth } = require('../middlewares/auth');
 const routesCreateUser = require('./createUser');
 const NotFoundError = require('../errors/not_found_error');
+const { errorLogger } = require('../middlewares/logger');
 
 const routes = express.Router();
 
-routes.use(express.json()); // перенести в app
+routes.use(express.json());
 
 routes.use('/users', auth, routesUsers);
 routes.use('/cards', auth, routesCards);
@@ -18,6 +19,10 @@ routes.use('/signin', routesLogin);
 
 routes.use('*', (_req, _res, next) => next(new NotFoundError('Страница не найдена')));
 
-routes.use(errors()); // перенести в app
+// подключаем логгер ошибок
+// нужно подключить после обработчиков роутов и до обработчиков ошибок
+routes.use(errorLogger);
+
+routes.use(errors());
 
 module.exports = routes;

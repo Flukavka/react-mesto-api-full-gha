@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger } = require('./middlewares/logger');
 const routes = require('./routes/index');
 
 const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
@@ -40,11 +40,14 @@ app.use(limiter);
 // подключаем логгер запросов
 app.use(requestLogger);
 
-app.use('/', routes);
+//
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
-// подключаем логгер ошибок
-// нужно подключить после обработчиков роутов и до обработчиков ошибок
-app.use(errorLogger);
+app.use('/', routes);
 
 routes.use(errorMiddleware);
 

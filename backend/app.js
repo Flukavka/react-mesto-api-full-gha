@@ -8,7 +8,7 @@ const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const { requestLogger } = require('./middlewares/logger');
 const routes = require('./routes/index');
 
-const { PORT /* = 4000 */, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 // подключаемся к БД
 mongoose.connect(DB_URL);
